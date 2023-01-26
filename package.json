@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/teomrd/vercel-api#readme",
   "devDependencies": {
-    "@vercel/node": "^2.8.15"
+    "@vercel/node": "^2.8.16",
+    "nodemailer": "^6.9.1"
   }
 }
