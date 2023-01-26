@@ -1,7 +1,7 @@
  export default function handler(request, response) {
+  const { name = "World" } = request.query;
+
   response.status(200).json({
-    body: request.body,
-    query: request.query,
-    cookies: request.cookies,
+    hello: name
   });
 }
