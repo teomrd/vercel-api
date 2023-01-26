@@ -1,0 +1,27 @@
+{
+  "name": "vercel-api",
+  "version": "1.0.0",
+  "description": "This is a really simple example of a REST API meant to be deployed on Vercel.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teomrd/vercel-api.git"
+  },
+  "keywords": [
+    "vercel",
+    "rest",
+    "api"
+  ],
+  "author": "teomrd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teomrd/vercel-api/issues"
+  },
+  "homepage": "https://github.com/teomrd/vercel-api#readme",
+  "devDependencies": {
+    "@vercel/node": "^2.8.15"
+  }
+}
