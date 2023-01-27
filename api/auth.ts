@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { allowCors } from '../middleware/allowCors';
 
-const auth = async (request: VercelRequest, response: VercelResponse) => {
+const handler = async (request: VercelRequest, response: VercelResponse) => {
   const { code, state } = request.query;
 
   const jsonResponse = await fetch(
@@ -23,4 +24,4 @@ const auth = async (request: VercelRequest, response: VercelResponse) => {
 };
 
 
-export default auth;
+export default allowCors(handler);

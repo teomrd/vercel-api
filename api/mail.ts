@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { allowCors } from '../middleware/allowCors';
 
 const myMail = process.env.MY_MAIL;
 const myName = process.env.MY_NAME;
@@ -40,7 +41,7 @@ const mail = async ({
   return info;
 };
 
-export default async function handler(request: VercelRequest, response: VercelResponse) {
+const handler = async (request: VercelRequest, response: VercelResponse) => {
   const {
     to, subject, html, text,
   } = request.body;
@@ -56,3 +57,5 @@ export default async function handler(request: VercelRequest, response: VercelRe
     message: 'mail sent 📧',
   });
 }
+
+export default allowCors(handler);
