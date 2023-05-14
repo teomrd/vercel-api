@@ -21,18 +21,11 @@ const handler = async (
       user: FTP_USER,
       password: FTP_PASSWORD,
     });
-
-    const upload = (buffer, fileName) => {
-      return ftp.put(buffer, fileName);
-    };
-
-    console.log('request 👉', req);
     const file = req.body;
-    const fileName = `aa.png`;
-    const response = await upload(file, `${imageRepository}/${fileName}`);
-    console.log('response 👉', response);
+    const { fileName } = req.query;
+    await ftp.put(file, `${imageRepository}/${fileName}`);
     res.status(200).json({
-      message: response,
+      message: `${fileName} successfully uploaded 🚀`,
       url: `${baseHost}/${imageRepository}/${fileName}`
     });
   } catch (error) {
