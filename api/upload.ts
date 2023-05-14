@@ -9,7 +9,7 @@ const {
   FTP_PASSWORD,
 } = process.env;
 
-const ftp = new jsftp.connect({
+const ftp = new jsftp({
   host: FTP_HOST,
   port: FTP_PORT,
   user: FTP_USER,
