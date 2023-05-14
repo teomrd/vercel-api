@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import ftpClient from 'ftp';
+import { allowCors } from '../middleware/allowCors';
 
 const {
   FTP_HOST,
@@ -39,10 +40,10 @@ const upload = (file, fileName) => {
 const baseHost = process.env.FILE_HOST;
 const imageRepository = process.env.IMAGE_FOLDER;
 
-export default async function handler(
+const handler = async (
   req: VercelRequest,
   res: VercelResponse,
-) {
+)  => {
   try {
     console.log('request 👉', req);
     const file = req.body;
@@ -60,3 +61,5 @@ export default async function handler(
     });
   }
 }
+
+export default allowCors(handler);
