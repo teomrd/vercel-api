@@ -8,16 +8,6 @@ const {
   FTP_PASSWORD,
 } = process.env;
 
-const ftp = await FTP.connect({
-  host: FTP_HOST,
-  user: FTP_USER,
-  password: FTP_PASSWORD,
-});
-
-const upload = (buffer, fileName) => {
-  return ftp.put(buffer, fileName);
-};
-
 const baseHost = process.env.FILE_HOST;
 const imageRepository = process.env.IMAGE_FOLDER;
 
@@ -26,6 +16,16 @@ const handler = async (
   res: VercelResponse,
 )  => {
   try {
+    const ftp = await FTP.connect({
+      host: FTP_HOST,
+      user: FTP_USER,
+      password: FTP_PASSWORD,
+    });
+
+    const upload = (buffer, fileName) => {
+      return ftp.put(buffer, fileName);
+    };
+
     console.log('request 👉', req);
     const file = req.body;
     const fileName = `aa.png`;
