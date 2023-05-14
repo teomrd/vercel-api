@@ -24,5 +24,8 @@
   "devDependencies": {
     "@vercel/node": "^2.8.16",
     "nodemailer": "^6.9.1"
+  },
+  "dependencies": {
+    "ftp": "^0.3.10"
   }
 }
