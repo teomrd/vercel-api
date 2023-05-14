@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import ftpClient from 'ftp';
+import jsftp from 'jsftp';
 import { allowCors } from '../middleware/allowCors';
 
 const {
@@ -9,33 +9,24 @@ const {
   FTP_PASSWORD,
 } = process.env;
 
-const upload = (file, fileName) => {
+const ftp = new jsftp.connect({
+  host: FTP_HOST,
+  port: FTP_PORT,
+  user: FTP_USER,
+  pass: FTP_PASSWORD,
+});
+
+const upload = (buffer, fileName) => {
   return new Promise((resolve, reject) => {
-    const ftp = new ftpClient();
-    ftp.on('ready', () => {
-      ftp.put(file, fileName, (err) => {
-        if (err) {
-          ftp.end();
-          reject(err);
-        } else {
-          ftp.end();
-          resolve(`${fileName} uploaded 🚀`);
-        }
-      });
-    });
-
-    ftp.on('error', (err) => {
-      reject(err);
-    });
-
-    ftp.connect({
-      host: FTP_HOST,
-      port: FTP_PORT,
-      user: FTP_USER,
-      password: FTP_PASSWORD,
-    });
+    ftp.put(buffer, fileName), err => {
+      if (err) {
+        reject(err);
+      }
+      console.log("File transferred successfully!");
+      resolve(`${fileName} uploaded 🚀`);
+    }
   });
-}
+};
 
 const baseHost = process.env.FILE_HOST;
 const imageRepository = process.env.IMAGE_FOLDER;
